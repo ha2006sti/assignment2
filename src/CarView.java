@@ -11,7 +11,7 @@ import java.awt.event.ActionListener;
  * It communicates with the Controller by calling its methods when an action fires in
  * its components.
  * TODO: Write more actionListeners and wire the rest of the buttons
- **/
+ */
 
 public class CarView extends JFrame {
     public static final int X = 800;
@@ -58,10 +58,10 @@ public class CarView extends JFrame {
                 new SpinnerNumberModel(gasAmount, //initial value
                         0, //min
                         100, //max
-                        1);//step
+                        1); //step
         gasSpinner = new JSpinner(spinnerModel);
         gasSpinner.addChangeListener(e -> {
-                gasAmount = (int) ((JSpinner)e.getSource()).getValue();
+            gasAmount = (int) ((JSpinner)e.getSource()).getValue();
         });
 
         gasPanel.setLayout(new BorderLayout());
@@ -82,7 +82,6 @@ public class CarView extends JFrame {
         this.add(controlPanel);
         controlPanel.setBackground(Color.CYAN);
 
-
         startButton.setBackground(Color.blue);
         startButton.setForeground(Color.green);
         startButton.setPreferredSize(new Dimension(X/5-15,200));
@@ -93,12 +92,39 @@ public class CarView extends JFrame {
         stopButton.setPreferredSize(new Dimension(X/5-15,200));
         this.add(stopButton);
 
-        // This actionListener is for the gas button only
-        // TODO: Create more for each component as necessary
+        // ActionListeners for the car control buttons
+
         gasButton.addActionListener(e -> {
             carC.gas(gasAmount);
         });
 
+        brakeButton.addActionListener(e -> {
+            carC.brake(gasAmount);
+        });
+
+        turboOnButton.addActionListener(e -> {
+            carC.turboOn();
+        });
+
+        turboOffButton.addActionListener( e -> {
+            carC.turboOff();
+        });
+
+        leftButton.addActionListener(e -> {
+            carC.turnLeft();
+        });
+
+        rightButton.addActionListener(e -> {
+            carC.turnRight();
+        });
+
+        startButton.addActionListener(e -> {
+            carC.startAllCars();
+        });
+
+        stopButton.addActionListener(e -> {
+            carC.stopAllCars();
+        });
         // Make the panel layout more compact
         this.pack();
 
